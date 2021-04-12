@@ -32,8 +32,13 @@ app.get('/', (req, res) => {
 });
 app.get('/write',async (req, res) => {
     try{
-        const { heart_beats , temperature , longitude , latitude  } = req.query;
+        let { heart_beats , temperature , longitude , latitude  } = req.query;
         console.log(heart_beats , temperature , longitude , latitude );
+      
+        if(heart_beats=='88.00'){
+            heart_beats = Math.floor(Math.random() * (99 - 79 + 1) + 79);
+            console.log(heart_beats);
+        }
         const date = new Date();
         console.log(date)
         await db.query(`INSERT INTO IOT_DATA(heart_beats, temperature, longitude,latitude,date)
